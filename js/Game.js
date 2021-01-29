@@ -1,11 +1,6 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Game.js */
-const hearts = document.querySelectorAll('.tries > img');
-const h1 = document.querySelector('h1');
-const overlay = document.querySelector('#overlay');
-let win = false;
-const buttons = document.querySelectorAll('.keyrow > button');
 
 class Game{
     constructor(){
@@ -26,6 +21,7 @@ class Game{
     }
 
     handleInteraction(letter) {
+        const buttons = document.querySelectorAll('.keyrow > button');
         if(this.activePhrase.checkLetter(letter.toLowerCase())){
             this.activePhrase.showMatchedLetter(letter.toLowerCase());
             for(let i = 0; i < buttons.length; i++) {
@@ -34,7 +30,6 @@ class Game{
                 }
             }
             if(this.checkWin()) {
-                win = true;
                 this.gameOver();
             }
         } else {
@@ -49,7 +44,9 @@ class Game{
     }
 
     removeLife() {
-        if(this.missed < 4) {
+        const hearts = document.querySelectorAll('.tries > img');
+        console.log(this.missed);
+        if(this.missed < 5) {
             hearts[this.missed].src = "images/lostHeart.png";
             this.missed += 1;
         } else {
@@ -58,9 +55,9 @@ class Game{
     }
 
     checkWin() {
-        const phrase = this.activePhrase.phrase.replace(/\s+/g, '');
-        for(let i = 0; i < phrase.length; i++) {
-            if(document.querySelector('.' + phrase[i].toLowerCase()).classList.contains('hide')) {
+        const letter = document.querySelectorAll('.letter')
+        for(let i = 0; i < letter.length; i++) {
+            if(letter[i].className.includes('hide')){
                 return false;
             }
         }
@@ -68,17 +65,27 @@ class Game{
     }
 
     gameOver() {
-        if(win) {
+        const h1 = document.querySelector('h1');
+        const overlay = document.querySelector('#overlay');
+        if(this.missed < 5) {
             h1.innerHTML = "You Win!";
         } else {
             h1.innerHTML = "You Lose!";
         }
         overlay.style.display = '';
         reset();
+        this.missed = 0;
     }
 }
 
 function reset(){
-    this.missed = 0;
-    this.activePhrase = null;
+    const hearts = document.querySelectorAll('.tries > img');
+    display.innerHTML = "";
+    for(let i = 0; i < buttons.length; i++) {
+        buttons[i].className = "key";
+        buttons[i].disabled = false;
+    }
+    for(let i = 0; i < hearts.length; i++) {
+        hearts[i].src = "images/liveHeart.png";
+    }
 }
