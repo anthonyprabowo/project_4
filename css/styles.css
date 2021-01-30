@@ -86,7 +86,8 @@ button {
 /* Title */
 
 .header {
-  color: #3a3f58;
+  /* color: #3a3f58; */
+  color: rgba(58, 63, 88, .75);
 }
 
 
