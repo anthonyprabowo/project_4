@@ -5,7 +5,11 @@
 class Game{
     constructor(){
         this.missed = 0;
-        this.phrases = ['Anthony Prabowo', "Thumbscrew", "Harry Potter", "Mysql Database", "JavaScript"];
+        this.phrases = [new Phrase('Anthony Prabowo'), 
+                        new Phrase("Thumbscrew"), 
+                        new Phrase("Harry Potter"), 
+                        new Phrase("Mysql Database"), 
+                        new Phrase("JavaScript")];
         this.activePhrase = null;
     }
 
@@ -14,13 +18,13 @@ class Game{
     */
     startGame(){
         document.querySelector('#overlay').style.display = 'none';
-        this.activePhrase = new Phrase(this.getRandomPhrase());
+        this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
     }
 
     /*
     * randomly retrieves one of the phrases stored in the phrases array and returns it.
-    * @return phrase keyword
+    * @return phrase object
     */
     getRandomPhrase() {
         const randomNumber = Math.floor(Math.random() * this.phrases.length);
@@ -118,7 +122,7 @@ function random_bg_color() {
     var x = Math.floor(Math.random() * 256);
     var y = Math.floor(Math.random() * 256);
     var z = Math.floor(Math.random() * 256);
-    var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+    var bgColor = "rgba(" + x + "," + y + "," + z + ", .5)";
 
     document.querySelector('html').style.backgroundColor = bgColor;
 }
