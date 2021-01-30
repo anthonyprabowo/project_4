@@ -18,13 +18,13 @@ buttonStart.addEventListener('click', () => {
 for(let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', (e) => {
         game.handleInteraction(e.target.textContent);
-    })
+    });
 };
 
 // handle user's keyboard presses
-document.onkeypress = (e) => {
+document.addEventListener('keyup', (e) => {
     game.handleInteraction(e.key.toLowerCase());
-}
+}); 
 
 
 
